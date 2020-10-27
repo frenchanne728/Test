@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct TestApp: App {
+    
+    @State private var store = testStore
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: store)
         }
     }
 }
