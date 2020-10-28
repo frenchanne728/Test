@@ -1,14 +1,14 @@
 //
-//  ContentView.swift
+//  ThemeChooserView.swift
 //  Test
 //
-//  Created by Anne French on 10/21/20.
+//  Created by Anne French on 10/28/20.
 //
 
 import SwiftUI
 
-struct ContentView: View {
-    
+struct ThemeChooserView: View {
+
     @ObservedObject var store: ThemeStore
     @State private var editMode: EditMode = .inactive
     
@@ -33,7 +33,8 @@ struct ContentView: View {
             )
             .environment(\.editMode, $editMode)
             
-        } // NavigationView
+        }
+        .padding(0.0) // NavigationView
     } // body View
 
     func addTheme() {
@@ -62,12 +63,13 @@ struct ThemeCell: View {
     var theme: Theme // passed in just ONE theme
     
     var body: some View {
-        NavigationLink( destination: ThemeDetail(theme: theme, emoji: "😊")) {
+        NavigationLink( destination: Text(theme.name)) {
+//        NavigationLink( destination: ThemeDetail(theme: theme, emoji: "😊")) {
             
             VStack(alignment: .leading) {
                 Text(theme.name)
                     .foregroundColor(self.store.getThemeColor(theme.buttonColor))
-                Text(theme.emojis)
+                Text(String(theme.emojis.substring(to: theme.pairCount)))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
@@ -76,9 +78,10 @@ struct ThemeCell: View {
 } // ThemeCell View
 
 
-struct ContentView_Previews: PreviewProvider {
+struct ThemeChooserView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(store: testStore)
+        ThemeChooserView(store: testStore)
     }
 }
+
 

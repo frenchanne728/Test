@@ -14,7 +14,7 @@ struct TestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(store: store)
+            ThemeChooserView(store: testStore)
         }
     }
 }

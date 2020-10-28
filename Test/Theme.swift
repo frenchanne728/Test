@@ -14,7 +14,7 @@ struct Theme: Identifiable, Equatable, Hashable {
     var backgroundColor: String = "black"
     var buttonColor: String = "orange"
     var emojis = String()
-    var pairCount = 3
+    var pairCount = 8
     
     static func == (lhs: Theme, rhs: Theme) -> Bool {
         lhs.id == rhs.id
@@ -29,32 +29,38 @@ let testData = [
     Theme(name: "Halloween",
           backgroundColor: "black",
           buttonColor: "orange",
-          emojis: "🦇😱🙀😈🎃👻🍭🍬"
+          emojis: "🦇😱🙀😈🎃👻🍭🍬",
+          pairCount: 8
     ),
     Theme(name: "Animals",
           backgroundColor: "pink",
           buttonColor: "yellow",
-          emojis: "🐶🐱🐭🐹🦊🐰🐻🐼"
+          emojis: "🐶🐱🐭🐹🦊🐰🐻🐼",
+          pairCount: 7
     ),
     Theme(name: "Fruit",
           backgroundColor: "green",
           buttonColor: "red",
-          emojis: "🍏🍎🍐🍊🍋🍌🍉🍇"
+          emojis: "🍏🍎🍐🍊🍋🍌🍉🍇",
+          pairCount: 6
     ),
     Theme(name: "Vehicles",
           backgroundColor: "gray",
           buttonColor: "blue",
-          emojis: "🚗🚎🚒🚜🛵🚘🚍🛴"
+          emojis: "🚗🚎🚒🚜🛵🚘🚍🛴",
+          pairCount: 5
     ),
     Theme(name: "Flags",
           backgroundColor: "red",
           buttonColor: "gray",
-          emojis: "🇦🇩🇦🇮🏳️‍🌈🇦🇸🇰🇿🇨🇴🇲🇷🇿🇦"
+          emojis: "🇦🇩🇦🇮🏳️‍🌈🇦🇸🇰🇿🇨🇴🇲🇷🇿🇦",
+          pairCount: 4
     ),
     Theme(name: "Sports",
           backgroundColor: "orange",
           buttonColor: "gray",
-          emojis: "⚽️🏀🏈⚾️🏉🎱🚵🏻‍♀️🚴🏼"
+          emojis: "⚽️🏀🏈⚾️🏉🎱🚵🏻‍♀️🚴🏼",
+          pairCount: 3
     )
 ]
 
