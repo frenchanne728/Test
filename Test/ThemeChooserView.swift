@@ -39,8 +39,7 @@ struct ThemeChooserView: View {
 
     func addTheme() {
         withAnimation {
-            store.themes.append(Theme(name: "New Theme",
-                pairCount: 3 ))
+            store.themes.append(Theme(name: "New Theme", emojis: "😊🤣🥰", pairCount: 3))
         }
     }
 
@@ -55,10 +54,12 @@ struct ThemeChooserView: View {
             store.themes.remove(atOffsets: offsets)
         }
     }
-} // ContenView
+} // ThemeChooserView
 
 struct ThemeCell: View {
     @ObservedObject var store: ThemeStore
+    
+    @State private var editMode: EditMode = .inactive
     
     var theme: Theme // passed in just ONE theme
     
@@ -67,8 +68,10 @@ struct ThemeCell: View {
 //        NavigationLink( destination: ThemeDetail(theme: theme, emoji: "😊")) {
             
             VStack(alignment: .leading) {
-                Text(theme.name)
-                    .foregroundColor(self.store.getThemeColor(theme.buttonColor))
+//                Text(theme.name)
+                EditableText(self.store.getName(for: theme), isEditing: self.editMode.isEditing) { name in
+                    self.store.setName(name, for: theme)
+                }     .foregroundColor(self.store.getThemeColor(theme.buttonColor))
                 Text(String(theme.emojis.substring(to: theme.pairCount)))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
