@@ -37,8 +37,6 @@ class ThemeStore: ObservableObject {
                 
             }
         }
-        print(self.themes)
-        print(self.themeNames)
     }
 
     func getThemeColor(_ color: String) -> Color

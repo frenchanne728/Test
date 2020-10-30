@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3353E40254C54F30027573A /* ThemeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3353E3F254C54F30027573A /* ThemeEditorView.swift */; };
 		F33C42F7254079A600323B46 /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33C42F6254079A600323B46 /* TestApp.swift */; };
 		F33C42FB254079A700323B46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F33C42FA254079A700323B46 /* Assets.xcassets */; };
 		F33C42FE254079A700323B46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F33C42FD254079A700323B46 /* Preview Assets.xcassets */; };
@@ -14,7 +15,6 @@
 		F33C4314254079A700323B46 /* TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33C4313254079A700323B46 /* TestUITests.swift */; };
 		F35EAF24254213510040A1EE /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EAF23254213510040A1EE /* ThemeStore.swift */; };
 		F35EAF29254214410040A1EE /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EAF28254214410040A1EE /* Theme.swift */; };
-		F35EAF36254217A60040A1EE /* ThemeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35EAF35254217A60040A1EE /* ThemeDetail.swift */; };
 		F3AFB14D2549F45B003AFB20 /* ThemeChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFB14C2549F45B003AFB20 /* ThemeChooserView.swift */; };
 		F3AFB158254A0109003AFB20 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AFB157254A0109003AFB20 /* StringExtension.swift */; };
 		F3F34413254486AA00E3FF2B /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F34412254486AA00E3FF2B /* EditableText.swift */; };
@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F3353E3F254C54F30027573A /* ThemeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditorView.swift; sourceTree = "<group>"; };
 		F33C42F3254079A600323B46 /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33C42F6254079A600323B46 /* TestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
 		F33C42FA254079A700323B46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		F33C4315254079A700323B46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F35EAF23254213510040A1EE /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
 		F35EAF28254214410040A1EE /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		F35EAF35254217A60040A1EE /* ThemeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDetail.swift; sourceTree = "<group>"; };
 		F3AFB14C2549F45B003AFB20 /* ThemeChooserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChooserView.swift; sourceTree = "<group>"; };
 		F3AFB157254A0109003AFB20 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		F3F34412254486AA00E3FF2B /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
@@ -107,12 +107,12 @@
 			children = (
 				F33C42F6254079A600323B46 /* TestApp.swift */,
 				F3AFB14C2549F45B003AFB20 /* ThemeChooserView.swift */,
+				F3353E3F254C54F30027573A /* ThemeEditorView.swift */,
 				F33C42FA254079A700323B46 /* Assets.xcassets */,
 				F33C42FF254079A700323B46 /* Info.plist */,
 				F33C42FC254079A700323B46 /* Preview Content */,
 				F35EAF23254213510040A1EE /* ThemeStore.swift */,
 				F35EAF28254214410040A1EE /* Theme.swift */,
-				F35EAF35254217A60040A1EE /* ThemeDetail.swift */,
 				F3F34412254486AA00E3FF2B /* EditableText.swift */,
 				F3AFB157254A0109003AFB20 /* StringExtension.swift */,
 			);
@@ -274,11 +274,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F35EAF36254217A60040A1EE /* ThemeDetail.swift in Sources */,
 				F3AFB158254A0109003AFB20 /* StringExtension.swift in Sources */,
 				F35EAF29254214410040A1EE /* Theme.swift in Sources */,
 				F35EAF24254213510040A1EE /* ThemeStore.swift in Sources */,
 				F3AFB14D2549F45B003AFB20 /* ThemeChooserView.swift in Sources */,
+				F3353E40254C54F30027573A /* ThemeEditorView.swift in Sources */,
 				F3F34413254486AA00E3FF2B /* EditableText.swift in Sources */,
 				F33C42F7254079A600323B46 /* TestApp.swift in Sources */,
 			);

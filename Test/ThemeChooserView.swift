@@ -10,13 +10,14 @@ import SwiftUI
 struct ThemeChooserView: View {
 
     @ObservedObject var store: ThemeStore
+    
     @State private var editMode: EditMode = .inactive
     
     var body: some View {
         NavigationView {
             List {
                 ForEach(store.themes) { theme in
-                    ThemeCell(store: store, theme: theme)
+                    return ThemeCell(store: store, theme: theme, editMode: $editMode)
                 }
                 .onMove(perform: moveThemes)
                 .onDelete(perform: deleteThemes)
@@ -32,14 +33,13 @@ struct ThemeChooserView: View {
                 trailing: EditButton()
             )
             .environment(\.editMode, $editMode)
-            
         }
         .padding(0.0) // NavigationView
     } // body View
 
     func addTheme() {
         withAnimation {
-            store.themes.append(Theme(name: "New Theme", emojis: "😊🤣🥰", pairCount: 3))
+            store.themes.append(defaultTheme)
         }
     }
 
@@ -59,29 +59,41 @@ struct ThemeChooserView: View {
 struct ThemeCell: View {
     @ObservedObject var store: ThemeStore
     
-    @State private var editMode: EditMode = .inactive
+    var theme: Theme
+    @Binding var editMode: EditMode
     
-    var theme: Theme // passed in just ONE theme
-    
+    @State private var showThemeEditor = false
+
     var body: some View {
+        //tbd: replace destination with game view
         NavigationLink( destination: Text(theme.name)) {
-//        NavigationLink( destination: ThemeDetail(theme: theme, emoji: "😊")) {
-            
-            VStack(alignment: .leading) {
+            HStack {
+                Text(self.editMode.isEditing ? "✏️" : "")
+                    .onTapGesture {
+                        self.showThemeEditor = true
+                    }.popover(isPresented: $showThemeEditor) {
+                        ThemeEditorView(theme: self.theme, showThemeEditor: self.$showThemeEditor)
+//                            .environmentObject(self.store)
+//                            .frame(minWidth: 300, minHeight: 500)
+                    }
+
+                VStack(alignment: .leading) {
 //                Text(theme.name)
-                EditableText(self.store.getName(for: theme), isEditing: self.editMode.isEditing) { name in
-                    self.store.setName(name, for: theme)
-                }     .foregroundColor(self.store.getThemeColor(theme.buttonColor))
-                Text(String(theme.emojis.substring(to: theme.pairCount)))
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
+                    EditableText(self.store.getName(for: theme), isEditing: self.editMode.isEditing) { name in
+                        self.store.setName(name, for: theme)
+                    }     .foregroundColor(self.store.getThemeColor(theme.buttonColor))
+                    Text(String(theme.emojis.substring(to: theme.pairCount)))
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                } // VStack
+            } // HStack
         } // NavigationLink
     } // body
 } // ThemeCell View
 
 
 struct ThemeChooserView_Previews: PreviewProvider {
+
     static var previews: some View {
         ThemeChooserView(store: testStore)
     }

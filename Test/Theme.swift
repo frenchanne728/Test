@@ -25,6 +25,13 @@ struct Theme: Identifiable, Equatable, Hashable {
     }
 }
 
+let defaultTheme = Theme(name: "New Theme",
+                         backgroundColor: "white",
+                         buttonColor: "black",
+                         emojis: "→←",
+                         pairCount: 2
+)
+
 let testData = [
     Theme(name: "Halloween",
           backgroundColor: "black",
@@ -61,7 +68,8 @@ let testData = [
           buttonColor: "gray",
           emojis: "⚽️🏀🏈⚾️🏉🎱🚵🏻‍♀️🚴🏼",
           pairCount: 3
-    )
+    ),
+    defaultTheme
 ]
 
 
