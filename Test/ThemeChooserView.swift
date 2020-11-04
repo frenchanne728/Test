@@ -59,29 +59,31 @@ struct ThemeChooserView: View {
 struct ThemeCell: View {
     @ObservedObject var store: ThemeStore
     
-    var theme: Theme
+    @State var theme: Theme
     @Binding var editMode: EditMode
     
     @State private var showThemeEditor = false
 
     var body: some View {
         //tbd: replace destination with game view
-        NavigationLink( destination: Text(theme.name)) {
-            HStack {
+       NavigationLink( destination: Text(theme.name)
+                            .navigationBarTitle(self.store.getName(for: theme))) {
+        HStack {
                 Text(self.editMode.isEditing ? "✏️" : "")
                     .onTapGesture {
                         self.showThemeEditor = true
                     }.popover(isPresented: $showThemeEditor) {
-                        ThemeEditorView(theme: self.theme, showThemeEditor: self.$showThemeEditor)
-//                            .environmentObject(self.store)
-//                            .frame(minWidth: 300, minHeight: 500)
+                        ThemeEditorView(chosenTheme: self.$theme,
+                                        isShowing: self.$showThemeEditor)
+                            .environmentObject(self.store)
                     }
 
                 VStack(alignment: .leading) {
-//                Text(theme.name)
                     EditableText(self.store.getName(for: theme), isEditing: self.editMode.isEditing) { name in
                         self.store.setName(name, for: theme)
-                    }     .foregroundColor(self.store.getThemeColor(theme.buttonColor))
+                    }
+                    .foregroundColor(self.store.getThemeColor(theme.buttonColor))
+                    
                     Text(String(theme.emojis.substring(to: theme.pairCount)))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
@@ -91,6 +93,54 @@ struct ThemeCell: View {
     } // body
 } // ThemeCell View
 
+struct ThemeEditorView: View {
+    @EnvironmentObject var store: ThemeStore
+    
+    @Binding var chosenTheme: Theme
+    @Binding var isShowing: Bool
+    @State private var themeName: String = ""
+    @State private var emojisToAdd: String = ""
+
+    var body: some View {
+        VStack(spacing: 0) {
+            ZStack {
+                Text("Theme Editor").font(.headline).padding()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.isShowing = false
+                    }, label: { Text("Done") }).padding()
+                }
+            }
+            Divider()
+            Form {
+                Section {
+                    TextField("Theme Name", text: $themeName, onEditingChanged: { began in
+                        if !began {
+                            self.store.renameTheme(self.chosenTheme, to: self.themeName)
+                        }
+                    })
+                    TextField("Add Emoji", text: $emojisToAdd, onEditingChanged: { began in
+                        if !began {
+                            self.chosenTheme = self.store.addEmoji(self.emojisToAdd, toTheme: self.chosenTheme)
+                            self.emojisToAdd = ""
+                        }
+                    })
+                }
+                Section(header: Text("Remove Emoji")) {
+                    Grid(chosenTheme.emojis.map { String($0) }, id: \.self) { emoji in
+                        Text(emoji)
+                            .onTapGesture {
+                                self.chosenTheme = self.store.removeEmoji(emoji, fromTheme: self.chosenTheme)
+                                print("Emojis now in chosen theme: \(self.chosenTheme.emojis)")
+                        }
+                    }
+                }
+            } // Form
+        } // VStack
+        .onAppear { self.themeName = self.store.themeNames[self.chosenTheme] ?? "" }
+    }
+} // ThemeEditorView
 
 struct ThemeChooserView_Previews: PreviewProvider {
 

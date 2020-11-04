@@ -10,7 +10,7 @@ import Combine
 
 class ThemeStore: ObservableObject {
     @Published var themes: [Theme]
-    @Published private var themeNames = [Theme:String]()
+    @Published private(set) var themeNames = [Theme:String]()
     
     let name: String
 
@@ -76,6 +76,39 @@ class ThemeStore: ObservableObject {
         themeNames[theme] = nil
     }
     
+    func renameTheme(_ theme: Theme, to name: String) {
+        themeNames[theme] = name
+    }
+    
+    func addTheme(_ theme: Theme, named name: String) {
+        themeNames[theme] = name
+    }
+                
+    @discardableResult
+    func addEmoji(_ emojisToAdd: String, toTheme theme: Theme) -> Theme {
+        var newTheme = theme
+        
+        newTheme.emojis.append(emojisToAdd)
+        return changeTheme(theme, to: newTheme)
+    }
+    
+    @discardableResult
+    func removeEmoji(_ emojisToRemove: String, fromTheme theme: Theme) -> Theme {
+        var newTheme = theme
+        
+        print("Emojis currently in chosen theme: \(theme.emojis)")
+        print("Emojis to remove: \(emojisToRemove)")
+        newTheme.emojis = theme.emojis.filter { !emojisToRemove.contains($0) }
+        return changeTheme(theme, to: newTheme)
+    }
+    
+    private func changeTheme(_ theme: Theme, to newTheme: Theme) -> Theme {
+        let name = themeNames[theme] ?? ""
+        themeNames[theme] = nil
+        themeNames[newTheme] = name
+        return newTheme
+    }
+
 } // class ThemeStore
 
 extension Dictionary where Key == Theme, Value == String {
